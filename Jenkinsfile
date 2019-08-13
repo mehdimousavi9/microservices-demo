@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+            docker {
+                image 'maven:3-alpine'
+                args '-v /root/.m2:/root/.m2'
+            }
+        }
     tools {
         maven 'Maven 3.3.9'
         jdk 'jdk8'
@@ -80,15 +85,36 @@ pipeline {
             }
         }
 
-        stage ('Build') {
+       /* stage ('Build') {
             steps {
                 sh 'mvn -D maven.test.failure.ignore=true install'
             }
             post {
                 success {
-                    junit 'target/surefire-reports/**/*.xml'
+                    junit 'target/surefire-reports/** /*.xml'
                 }
             }
-        }
+        }*/
+
+        stage('Build') {
+                    steps {
+                        sh 'mvn -B -DskipTests clean package'
+                    }
+         }
+         stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                 }
+            }
+         }
+         stage('Deliver') {
+            steps {
+                 sh './jenkins/scripts/deliver.sh'
+            }
+         }
     }
 }
