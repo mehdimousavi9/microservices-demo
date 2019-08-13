@@ -12,19 +12,10 @@ pipeline {
 
 
      parameters {
-        booleanParam(defaultValue: true, description: 'Include or Skip Checkout Stage', name: 'checkout')
-        booleanParam(defaultValue: true, description: 'Include or Skip Build Stage', name: 'build')
-        booleanParam(defaultValue: true, description: 'Include or Skip Publish Stage', name: 'publish')
-        booleanParam(defaultValue: true, description: 'Include or Skip Sonar Stage', name: 'sonar')
-        booleanParam(defaultValue: true, description: 'Build and push Docker images', name: 'buildDockerAndPush')
-        booleanParam(defaultValue: true, description: 'Build and publish Helm chart', name: 'buildAndPublishHelmChart')
-        booleanParam(defaultValue: true, description: 'Deploy artifact to Kubernetes', name: 'deployToK8s')
-        booleanParam(defaultValue: true, description: 'Deploy artifact to Weblogic', name: 'deployToWls')
-        booleanParam(defaultValue: true, description: 'Clean Workspace Directory after finish', name: 'cleanWorkspace')
+
 
         // publishDoc stage is deliberately disabled, because it triggers 'gradlew html2Confluence' which do not works with current gradle version 4.3
         // When gradle is successfully upgraded to 5.5.1+ it can be enabled.
-        booleanParam(defaultValue: false, description: 'Publish documentation to internal docu server and CLX community platform', name: 'publishDoc')
 
         string name: 'agentLabel', defaultValue: 'kubernetes', description: 'Build Agent Label', trim: true
         string name: 'agentWorkspace', defaultValue: 'microservices-demo', description: 'Workspace on the Build Agent', trim: true
