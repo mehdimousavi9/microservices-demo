@@ -67,6 +67,7 @@ pipeline {
         }*/
 
         stage("Checkout") {
+        //sdfewsdfws
             when {
                 expression { env.checkout == "true" }
             }
