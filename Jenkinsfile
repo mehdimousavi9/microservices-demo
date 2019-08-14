@@ -121,6 +121,7 @@ pipeline {
 
          stage('Deliver') {
             steps {
+                 sh 'ifconfig'
                  sh 'java -jar target/microservices-demo-2.0.0.RELEASE.jar'
             }
          }
