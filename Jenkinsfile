@@ -108,7 +108,7 @@ pipeline {
             //     sh './run-smoke-tests'
             // }
          //}
-        stage('Deploy') {
+        /*stage('Deploy') {
                     when {
                       expression {
                         currentBuild.result == null || currentBuild.result == 'SUCCESS'
@@ -117,12 +117,12 @@ pipeline {
                     steps {
                         sh 'mvn deploy'
                     }
-                }
+                }*/
 
-         //stage('Deliver') {
-            //steps {
-                 //sh './jenkins/scripts/deliver.sh'
-            //}
-         //}
+         stage('Deliver') {
+            steps {
+                 sh './jenkins/scripts/deliver.sh'
+            }
+         }
     }
 }
