@@ -102,10 +102,22 @@ pipeline {
                  }
             }
          }
-         stage('Deliver') {
-            steps {
-                 sh 'bash ./jenkins/deliver.sh'
-            }
+         stage('Deploy - Staging') {
+             steps {
+                 sh './deploy staging'
+                 sh './run-smoke-tests'
+             }
          }
+         stage('Deploy - Production') {
+             steps {
+                 sh './deploy production'
+             }
+         }
+
+         //stage('Deliver') {
+            //steps {
+                 //sh './jenkins/scripts/deliver.sh'
+            //}
+         //}
     }
 }
