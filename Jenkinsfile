@@ -108,11 +108,16 @@ pipeline {
             //     sh './run-smoke-tests'
             // }
          //}
-         stage('Deploy - Production') {
-             steps {
-                 sh './deploy production'
-             }
-         }
+        stage('Deploy') {
+                    when {
+                      expression {
+                        currentBuild.result == null || currentBuild.result == 'SUCCESS'
+                      }
+                    }
+                    steps {
+                        sh 'make publish'
+                    }
+                }
 
          //stage('Deliver') {
             //steps {
