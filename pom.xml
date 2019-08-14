@@ -94,6 +94,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
+                <!--maven-surefire-plugin has some bugs  and its better to upgrade to higher versions or at least downgrade to 2.20-->
                 <version>2.22.0</version>
                 <configuration>
                     <forkCount>3</forkCount>
