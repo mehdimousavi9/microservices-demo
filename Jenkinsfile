@@ -17,7 +17,7 @@ pipeline {
         // publishDoc stage is deliberately disabled, because it triggers 'gradlew html2Confluence' which do not works with current gradle version 4.3
         // When gradle is successfully upgraded to 5.5.1+ it can be enabled.
 
-        string name: 'agentLabel', defaultValue: 'kubernetes', description: 'Build Agent Label', trim: true
+       // string name: 'agentLabel', defaultValue: 'kubernetes', description: 'Build Agent Label', trim: true
         string name: 'agentWorkspace', defaultValue: 'microservices-demo', description: 'Workspace on the Build Agent', trim: true
         string name: 'gitURI', defaultValue: 'ssh://git@github.com:mehdimousavi9/microservices-demo.git', description: 'Git URI', trim: true
         string name: 'gitBranch', defaultValue: 'master', description: 'Git Branch to Checkout', trim: true
@@ -98,7 +98,7 @@ pipeline {
             }
             post {
                 always {
-                    junit 'target/surefire-reports/*.xml'
+                    junit 'target/surefire-reports/**/*.xml'
                  }
             }
          }
